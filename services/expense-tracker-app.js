@@ -66,10 +66,23 @@ const expenseTracker = (database) => {
         return database.manyOrNone(query);
     };
 
+    const categoryTotals = () => {
+        const join = `inner join expense on category.id = expense.id`;
+        const query = `select * from category ${join}`;
+
+        return database.manyOrNone(query);
+    };
+
+    const expensesForCategory = async (categoryId) => {
+        return await database.manyOrNone("select * from expense where category_id = $1", [categoryId]);
+    };
+
     return {
         catagories,
         addExpense,
-        allExpenses
+        allExpenses,
+        categoryTotals,
+        expensesForCategory
     };
 };
 

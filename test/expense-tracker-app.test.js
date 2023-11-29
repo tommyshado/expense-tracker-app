@@ -83,11 +83,47 @@ describe("The Expense Tracker", function () {
         assert.equal(1, expenses.length);
     });
     
+    it("should be able to filter by catagory of the expense", async () => {
+        const expense1 = {
+            expense: "Taxi",
+            amount: 15,
+            catagoryId: 6
+        };
+
+        // Add an expense
+        await ExpenseTracker.addExpense(expense1);
+
+        const expense2 = {
+            expense: "Taxi",
+            amount: 35,
+            catagoryId: 6
+        };
+
+        // Add an expense
+        await ExpenseTracker.addExpense(expense2);
+
+        const expense3 = {
+            expense: "Lunch",
+            amount: 35,
+            catagoryId: 4
+        };
+
+        // Add an expense
+        await ExpenseTracker.addExpense(expense3);
+        
+        // Get expenses
+        const expenses = await ExpenseTracker.allExpenses();
+
+        assert.equal(3, expenses.length);
+
+
+        const filtered = await ExpenseTracker.expensesForCategory(expense1.catagoryId);
+
+        assert.equal(2, filtered.length);
+    });
+
     // it("should be able to find expenses added", async () => {
 
     // });
 
-    // it("should be able to filter by catagory of the expense", async () => {
-
-    // });
 });
