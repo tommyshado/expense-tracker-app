@@ -1,0 +1,36 @@
+<form action="" method="post">
+    <div class="allExpenses">
+        <h1>All expenses</h1>
+
+        {{!-- add a table to show all expenses --}}
+        <table>
+            <tr>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Totals</th>
+            </tr>
+
+            {{#each expenses}}
+                <tr>
+                    <strong>
+                        <td>{{expense}}</td>
+                    </strong>
+                    <strong>
+                        <td>{{category_type}}</td>
+                    </strong>
+                    <strong>
+                        <td>R {{total}}.00</td>
+                    </strong>
+                    <form action="/expense/remove/{{id}}" method="post">
+                        <td>
+                            <button class="text-[#065A82] font-bold" onclick="return removeOnClick()">Delete</button>
+                        </td>
+                    </form>
+                </tr>
+            {{/each}}
+        </table>
+
+        {{!-- link to navigate into the home page --}}
+        <a href="/" class="text-[#065A82] font-bold text-2xl">Back to home</a>
+    </div>
+</form>

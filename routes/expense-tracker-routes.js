@@ -67,14 +67,20 @@ router.post("/expense/add", async (req, res) => {
 
 });
 
-
-// Create a route to display expenses summary per category
-router.get("/", async (req, res) => {
-  
-
-    res.render("index", {
-        categories: category
+// Create a route to display expenses all expenses
+router.get("/expenses/view", async (req, res) => {
+    // Get expenses category
+    const expensesCategory = await trackerExpense.allExpenses();
+ 
+    res.render("expenses", {
+        expenses: expensesCategory
     });
+});
+
+// Create a post route to delete an expense
+router.post("/expense/remove/:expenseId", async (req, res) => {
+    const { expenseId } = req.params;
+    await trackerExpense.deleteExpense(expenseId);
 });
 
 
