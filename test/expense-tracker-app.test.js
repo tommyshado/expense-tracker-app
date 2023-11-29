@@ -67,9 +67,21 @@ describe("The Expense Tracker", function () {
         );
     });
 
-    // it("should be able to add an expense", async () => {
+    it("should be able to add an expense", async () => {
+        const expense = {
+            expense: "Taxi",
+            amount: 20,
+            catagoryId: 2
+        };
 
-    // });
+        // Add an expense
+        await ExpenseTracker.addExpense(expense);
+        
+        // Get expenses
+        const expenses = await ExpenseTracker.allExpenses();
+
+        assert.equal(1, expenses.length);
+    });
     
     // it("should be able to find expenses added", async () => {
 

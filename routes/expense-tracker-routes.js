@@ -16,12 +16,43 @@ router.get("/", async (req, res) => {
     // Get catagories and...
     const catagories = await trackerExpense.catagories();
 
-    console.log(catagories);
-
     // Show the catagories
     res.render("index", {
         availableCatagories: catagories,
     });
+});
+
+router.post("/expense/add", async (req, res) => {
+    const { description, category, amount  } = req.body;
+
+    const addExpense = {
+        expense: description,
+        amount: amount,
+        catagoryId: category
+    };
+
+    // Check if all values are truthy then...
+    const checkExpense = _.every(addExpense, Boolean);
+
+    if (checkExpense) {
+        // add an expense
+        await trackerExpense.addExpense(addExpense);
+
+        // Flash a message to the UI
+        req.flash("success", `${addExpense.expense} expense added successfully.`);
+
+        // Redirect to the home route
+        res.redirect("/");
+        return;
+    };
+
+    // Otherwise flash an error message
+    if (!checkExpense) {
+        req.flash("error", "Expense not added successfully.");
+        res.redirect("/");
+        return;
+    };
+
 });
 
 
