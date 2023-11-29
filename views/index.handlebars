@@ -85,15 +85,21 @@
                     <th>Totals</th>
                 </tr>
 
+                {{#each categories}}
                 <tr>
                     <a href="/expense/filter">
-                        <td></td>
+                    <strong>
+                        <td>{{category_type}}</td>
+                    </strong>
                     </a>
-                    <a href="/expense/filter">
-                        <td></td>
-                    </a>
+                    <strong>
+                        <td>R {{total}}.00</td>
+                    </strong>
                 </tr>
+                {{/each}}
             </table>
+
+            <div>Total expenses {{grandTotal}}</div>
 
             <a href="/expenses/view" class="text-[#065A82] font-bold text-2xl">
                 <strong>

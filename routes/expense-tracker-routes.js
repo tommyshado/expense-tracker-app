@@ -16,9 +16,21 @@ router.get("/", async (req, res) => {
     // Get catagories and...
     const catagories = await trackerExpense.catagories();
 
+    // Get expenses category
+    const expensesCategory = await trackerExpense.allExpenses();
+    
+
+    let overallTotal = 1;
+
+    expensesCategory.forEach((record) => {
+        overallTotal += Number(record.total);
+    });
+
     // Show the catagories
     res.render("index", {
         availableCatagories: catagories,
+        categories: expensesCategory,
+        grandTotal: overallTotal
     });
 });
 
@@ -57,8 +69,12 @@ router.post("/expense/add", async (req, res) => {
 
 
 // Create a route to display expenses summary per category
-router.get("/expenses/category", async (req, res) => {
-    const category = await trackerExpense.allExpenses();
+router.get("/", async (req, res) => {
+  
+
+    res.render("index", {
+        categories: category
+    });
 });
 
 
