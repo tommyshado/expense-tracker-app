@@ -1,0 +1,21 @@
+<form action="/expense/filter/{{categoryId}}" method="get">
+    <h1>Fitering</h1>
+
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Totals</th>
+        </tr>
+
+        {{#each category}}
+        <tr>
+            <td>
+                {{expense}}
+            </td>
+            <td>
+                {{total}}
+            </td>
+        </tr>
+        {{/each}}
+    </table>
+</form>
