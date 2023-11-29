@@ -3,6 +3,15 @@
     <div>
         <h1>Expense Tracker APP</h1>
 
+        {{!-- flash messages --}}
+        {{#if messages.error}}
+            <p class="messages text-[#DB162F]">{{messages.error}}</p>
+        {{/if}}
+
+        {{#if messages.success}}
+            <p class="messages text-[#53A548]">{{messages.success}}</p>
+        {{/if}}
+
         {{!-- add an expense section --}}
         <div class="addExpense">
 
@@ -19,7 +28,7 @@
                 </h3>
 
                 <div class="px-4 py-2">
-                    <select for="description">
+                    <select for="description" name="description">
                         <option value="Lunch">Lunch</option>
                         <option value="Taxi">Taxi</option>
                         <option value="Rent">Rent</option>
