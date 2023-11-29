@@ -83,5 +83,7 @@ router.post("/expense/remove/:expenseId", async (req, res) => {
     await trackerExpense.deleteExpense(expenseId);
 });
 
+// Create a get route to filter
+
 
 export default router;

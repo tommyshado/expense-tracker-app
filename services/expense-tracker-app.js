@@ -60,28 +60,35 @@ const expenseTracker = (database) => {
     };
 
     const allExpenses = async () => {
+        // Join category and expense using foreign keys then...
         const join = `inner join category on expense.id = category.id`;
         const query = `select * from expense ${join}`;
 
+        // Get the results
         return database.manyOrNone(query);
     };
 
     const categoryTotals = () => {
+        // Join expense and category using foreign keys then...
         const join = `inner join expense on category.id = expense.id`;
         const query = `select * from category ${join}`;
 
+        // Get the results
         return database.manyOrNone(query);
     };
 
     const expensesForCategory = async (categoryId) => {
+        // Filter data from the  expense where category_id is equal to [categoryId]
         return await database.manyOrNone("select * from expense where category_id = $1", [categoryId]);
     };
 
     const findExpense = async (expense) => {
+        // Find id from expense where expense equal to [expense]
         return await database.oneOrNone("select id from expense where expense = $1", [expense]);
     };
 
     const deleteExpense = async (expenseId) => {
+        // Delete everything from expense where id equal [expenseId]
         return await database.none("delete from expense where id = $1", [expenseId]);
     };
 
