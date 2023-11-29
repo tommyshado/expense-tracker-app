@@ -1,0 +1,66 @@
+{{!-- create a route POST for form to add an expense --}}
+<form action="/expense/add" method="post">
+    <div>
+        <h1>Expense Tracker APP</h1>
+
+        {{!-- add an expense section --}}
+        <div class="addExpense">
+
+            <h2>
+                <strong>
+                    Add Expense
+                </strong>
+            </h2>
+
+            {{!-- create a description dropdown --}}
+            <div class="description">
+                <h3>
+                    Description
+                </h3>
+
+                <div class="px-4 py-2">
+                    <select for="description">
+                        {{#each availableCatagories}}
+                            <option value="{{category_type}}">{{category_type}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+
+            {{!-- create an amount input text area --}}
+            <div class="py-2">
+                <h3>
+                    Amount
+                </h3>
+
+                <div>
+                    <input name="amount"
+                        class="bg-[#FFFFFF] focus:bg-white rounded-md border-2"
+                        type="number" placeholder="Enter amount" />
+                </div>
+            </div>
+
+            {{#each availableCatagories}}
+                {{!-- categories section --}}
+                <div class="catagories">
+                    <label for="category" class="w-6 h-6 p-4">
+                        <input name="category" value="{{id}}" type="radio" class="focus:ring-2 focus:ring-[#] focus:border-[]">
+                        <span class="text-[#]">
+                            <strong>
+                                {{category_type}}
+                            </strong>
+                        </span>
+                    </label>
+                </div>
+            {{/each}}
+
+            {{!-- add an expense button --}}
+            <div class="addExpenseBtn">
+                <button type="submit" class="bg-[#065A82] py-2 px-4 text-[#FFFFFF] font-bold">Add expense</button>
+            </div>
+        </div>
+
+        {{!-- display user expenses --}}
+
+    </div>
+</form>
