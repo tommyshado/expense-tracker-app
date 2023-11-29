@@ -1,5 +1,7 @@
 const expenseTracker = (database) => {
 
+
+    // Retrieving everything in the category table
     const catagories = async () => {
         return await database.manyOrNone("select * from category");
     };
