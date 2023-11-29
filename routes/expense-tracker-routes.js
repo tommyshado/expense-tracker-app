@@ -83,6 +83,19 @@ router.post("/expense/remove/:expenseId", async (req, res) => {
     await trackerExpense.deleteExpense(expenseId);
 });
 
+// Create a route to render filteredCategory.handlebars
+router.get("/expense/filter/:categoryId", async (req, res) => {
+    // Grab an expense from the url
+    const { categoryId } = req.params;
+
+    // Filter data using id
+    const filter = await trackerExpense.expensesForCategory(categoryId);
+
+    res.render("filteredCategory", {
+        category: filter
+    });
+});
+
 // Create a get route to filter for category
 router.post("/expense/filter/:categoryId", async (req, res) => {
     // Grab an expense from the url
@@ -91,9 +104,16 @@ router.post("/expense/filter/:categoryId", async (req, res) => {
     // Filter data using id
     const filter = await trackerExpense.expensesForCategory(categoryId);
 
+    // Declare a variable to store the id of an expense category
+    let id;
+
+    filter.forEach(category => {
+        id = category.category_id;
+    });
+
     // Render the data into filteredCategory page
     res.render("filteredCategory", {
-        filtered: filter
+        categoryId: id
     });
 });
 
