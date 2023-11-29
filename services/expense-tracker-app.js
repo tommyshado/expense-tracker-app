@@ -52,7 +52,7 @@ const expenseTracker = (database) => {
             const values = `values ($1, $2, $3, $4)`;
             const query = `insert into expense (expense, amount, total, category_id) ${values}`;
 
-            expense.splice(2, 0, expense[2]);
+            expense.splice(2, 0, total);
     
             // Create an expense
             await database.none(query, expense);
@@ -77,12 +77,22 @@ const expenseTracker = (database) => {
         return await database.manyOrNone("select * from expense where category_id = $1", [categoryId]);
     };
 
+    const findExpense = async (expense) => {
+        return await database.oneOrNone("select id from expense where expense = $1", [expense]);
+    };
+
+    const deleteExpense = async (expenseId) => {
+        return await database.none("delete from expense where id = $1", [expenseId]);
+    };
+
     return {
         catagories,
         addExpense,
         allExpenses,
         categoryTotals,
-        expensesForCategory
+        expensesForCategory,
+        deleteExpense,
+        findExpense
     };
 };
 

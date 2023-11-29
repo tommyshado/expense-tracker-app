@@ -56,4 +56,10 @@ router.post("/expense/add", async (req, res) => {
 });
 
 
+// Create a route to display expenses summary per category
+router.get("/expenses/category", async (req, res) => {
+    const category = await trackerExpense.allExpenses();
+});
+
+
 export default router;

@@ -122,8 +122,28 @@ describe("The Expense Tracker", function () {
         assert.equal(2, filtered.length);
     });
 
-    // it("should be able to find expenses added", async () => {
+    it("should be able to delete an expenses added", async () => {
+        const expense1 = {
+            expense: "Taxi",
+            amount: 15,
+            catagoryId: 6
+        };
 
-    // });
+        // Add an expense
+        await ExpenseTracker.addExpense(expense1);
+
+        // Get expenses
+        const expenses = await ExpenseTracker.allExpenses();
+
+        assert.equal(1, expenses.length);
+
+        // Select an expense id 
+        const foundExpense = await ExpenseTracker.findExpense(expense1.expense);
+
+
+        await ExpenseTracker.deleteExpense(foundExpense.id);
+
+        assert.equal(0, expenses.length);
+    });
 
 });
