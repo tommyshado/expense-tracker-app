@@ -83,7 +83,19 @@ router.post("/expense/remove/:expenseId", async (req, res) => {
     await trackerExpense.deleteExpense(expenseId);
 });
 
-// Create a get route to filter
+// Create a get route to filter for category
+router.post("/expense/filter/:categoryId", async (req, res) => {
+    // Grab an expense from the url
+    const { categoryId } = req.params;
+
+    // Filter data using id
+    const filter = await trackerExpense.expensesForCategory(categoryId);
+
+    // Render the data into filteredCategory page
+    res.render("filteredCategory", {
+        filtered: filter
+    });
+});
 
 
 export default router;
