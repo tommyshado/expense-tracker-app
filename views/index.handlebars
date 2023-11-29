@@ -87,11 +87,11 @@
 
                 {{#each categories}}
                 <tr>
-                    <a href="/expense/filter">
-                    <strong>
-                        <td>{{category_type}}</td>
-                    </strong>
-                    </a>
+                    <td>
+                        <a href="/expense/filter/{{id}}">
+                            <strong>{{category_type}}</strong>
+                        </a>
+                    </td>
                     <strong>
                         <td>R {{total}}.00</td>
                     </strong>
