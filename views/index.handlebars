@@ -1,7 +1,7 @@
 {{!-- create a route POST for form to add an expense --}}
 <form action="/expense/add" method="post">
     <div>
-        <h1>Expense Tracker APP</h1>
+        <h1 class="font-bold text-4xl py-10">Expense Tracker APP</h1>
 
         {{!-- flash messages --}}
         {{#if messages.error}}
@@ -15,7 +15,7 @@
         {{!-- add an expense section --}}
         <div class="addExpense">
 
-            <h2>
+            <h2 class="py-4 text-2xl">
                 <strong>
                     Add Expense
                 </strong>
@@ -23,7 +23,7 @@
 
             {{!-- create a description dropdown --}}
             <div class="description">
-                <h3>
+                <h3 class="font-bold">
                     Description
                 </h3>
 
@@ -41,7 +41,7 @@
 
             {{!-- create an amount input text area --}}
             <div class="py-2">
-                <h3>
+                <h3 class="font-bold">
                     Amount
                 </h3>
 
@@ -75,7 +75,7 @@
         {{!-- display user expenses totals --}}
 
         <div class="summary">
-            <h2>
+            <h2 class="font-bold py-4 text-2xl">
                 Expense summary per catagory
             </h2>
 
@@ -88,7 +88,7 @@
                 {{#each categories}}
                 <tr>
                     <td>
-                        <a href="/expense/filter/{{id}}">
+                        <a href="/expense/filter/{{id}}" class="text-[#065A82]">
                             <strong>{{category_type}}</strong>
                         </a>
                     </td>
