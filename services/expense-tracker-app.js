@@ -51,16 +51,25 @@ const expenseTracker = (database) => {
             // Define values and query then...
             const values = `values ($1, $2, $3, $4)`;
             const query = `insert into expense (expense, amount, total, category_id) ${values}`;
+
+            expense.splice(2, 0, expense[2]);
     
             // Create an expense
-            await database.none(query, expense.join(total));
+            await database.none(query, expense);
         };
+    };
 
+    const allExpenses = async () => {
+        const join = `inner join category on expense.id = category.id`;
+        const query = `select * from expense ${join}`;
+
+        return database.manyOrNone(query);
     };
 
     return {
         catagories,
-        addExpense
+        addExpense,
+        allExpenses
     };
 };
 
