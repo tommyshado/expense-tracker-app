@@ -14,6 +14,16 @@ const config = {
 const pgp = pgPromise();
 const db = pgp(config);
 
+
+/* 
+    1. create a test for getting all available catagories
+    2. create a test for adding an expense
+    3. create a test for find expenses added
+    4. create a test for deleting an expense
+    5. create a test for retrieving catagories totals
+    6. create a test for filtering by catagory of expense
+*/
+
 describe("The Expense Tracker", function () {
     this.timeout(10000);
 
@@ -56,4 +66,16 @@ describe("The Expense Tracker", function () {
             catagories
         );
     });
+
+    // it("should be able to add an expense", async () => {
+
+    // });
+    
+    // it("should be able to find expenses added", async () => {
+
+    // });
+
+    // it("should be able to filter by catagory of the expense", async () => {
+
+    // });
 });
