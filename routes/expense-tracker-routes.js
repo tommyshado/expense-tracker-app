@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
     const expensesCategory = await trackerExpense.allExpenses();
     
 
-    let overallTotal = 1;
+    let overallTotal = 0;
 
     expensesCategory.forEach((record) => {
         overallTotal += Number(record.total);
