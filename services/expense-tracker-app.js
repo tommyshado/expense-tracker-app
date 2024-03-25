@@ -48,7 +48,7 @@ const expenseTracker = (database) => {
         if (expensesVals[expense[2]]) {
             
             // Calculate total then...
-            const total = expense[1] * expensesVals[expense[2]].days;
+            const total = Number(expense[1]) * expensesVals[expense[2]].days;
             
             // Define values and query then...
             const values = `values ($1, $2, $3, $4)`;
@@ -73,7 +73,7 @@ const expenseTracker = (database) => {
     const categoryTotals = () => {
         // Join expense and category using foreign keys then...
         const join = `inner join expense on category.id = expense.id`;
-        const query = `select * from category ${join}`;
+        const query = `select category_type, SUM(total) AS total from category ${join} group by category_type`;
 
         // Get the results
         return database.manyOrNone(query);
@@ -82,11 +82,6 @@ const expenseTracker = (database) => {
     const expensesForCategory = async (categoryId) => {
         // Filter data from the  expense where category_id is equal to [categoryId]
         return await database.manyOrNone("select * from expense where category_id = $1", [categoryId]);
-    };
-
-    const findExpense = async (expense) => {
-        // Find id from expense where expense equal to [expense]
-        return await database.oneOrNone("select id from expense where expense = $1", [expense]);
     };
 
     const deleteExpense = async (expenseId) => {
@@ -101,7 +96,6 @@ const expenseTracker = (database) => {
         categoryTotals,
         expensesForCategory,
         deleteExpense,
-        findExpense
     };
 };
 
